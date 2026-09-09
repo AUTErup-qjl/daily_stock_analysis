@@ -4,10 +4,7 @@
 name: Stale Issues & PRs
 
 on:
-  schedule:
-    # 每天 UTC 0:00（北京时间 8:00）检查一次
-    - cron: '0 0 * * *'
-  # 支持手动触发
+  # 定时任务已暂停（2026-09-09），仅保留手动触发
   workflow_dispatch:
 
 permissions:
