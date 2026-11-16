@@ -28,7 +28,7 @@ def verify_feishu_webhook(webhook_url, webhook_secret=None, webhook_keyword=None
         print("❌ 错误: Webhook URL 为空")
         return False
     
-    print(f"URL: {webhook_url}")
+    print("URL: [已配置，内容已隐藏]")
     
     if not webhook_url.startswith('https://open.feishu.cn/open-apis/bot/v2/hook/'):
         print("⚠️  警告: URL 格式可能不正确")
@@ -52,7 +52,7 @@ def verify_feishu_webhook(webhook_url, webhook_secret=None, webhook_keyword=None
             ).digest()
         ).decode()
         print("✅ 已配置签名校验")
-        print(f"   Secret: {webhook_secret[:20]}...")
+        print("   Secret: [内容已隐藏]")
     else:
         print("⏭️  未配置签名校验（可选）")
     
@@ -86,7 +86,7 @@ def verify_feishu_webhook(webhook_url, webhook_secret=None, webhook_keyword=None
     }
     
     print(f"请求方法: POST")
-    print(f"目标 URL: {webhook_url}")
+    print("目标 URL: [内容已隐藏]")
     print(f"请求体大小: {len(json.dumps(payload))} 字节")
     
     try:
@@ -100,8 +100,8 @@ def verify_feishu_webhook(webhook_url, webhook_secret=None, webhook_keyword=None
         
         print(f"\n📊 HTTP 响应")
         print(f"状态码: {response.status_code}")
-        print(f"响应头: {dict(response.headers)}")
-        print(f"响应体: {response.text}")
+        print("响应头已隐藏。")
+        print("响应体已隐藏。")
         
         # 5. 响应解析
         print("\n📌 第 5 步: 响应结果分析")
@@ -114,7 +114,7 @@ def verify_feishu_webhook(webhook_url, webhook_secret=None, webhook_keyword=None
                 msg = resp_json.get('msg', '')
                 
                 print(f"返回代码: {code}")
-                print(f"返回消息: {msg}")
+                print("返回消息已隐藏。")
                 
                 if code == 0:
                     print("\n" + "🎉" * 35)
@@ -128,7 +128,7 @@ def verify_feishu_webhook(webhook_url, webhook_secret=None, webhook_keyword=None
                 else:
                     print("\n❌ 飞书返回错误")
                     print(f"   错误代码: {code}")
-                    print(f"   错误信息: {msg}")
+                    print("   错误信息已隐藏，请根据错误代码排查。")
                     
                     # 错误诊断
                     print("\n🔧 错误诊断:")
@@ -147,7 +147,7 @@ def verify_feishu_webhook(webhook_url, webhook_secret=None, webhook_keyword=None
                     return False
             except json.JSONDecodeError:
                 print(f"\n❌ 无法解析 JSON 响应")
-                print(f"   原始响应: {response.text}")
+                print("   原始响应已隐藏。")
                 return False
         else:
             print(f"\n❌ HTTP 请求失败")
@@ -174,14 +174,14 @@ def verify_feishu_webhook(webhook_url, webhook_secret=None, webhook_keyword=None
         return False
     
     except requests.exceptions.ConnectionError as e:
-        print(f"\n❌ 连接错误: {e}")
+        print("\n❌ 连接错误（详情已隐藏）")
         print("   可能原因:")
         print("   - 网络无法访问")
         print("   - URL 格式错误")
         return False
     
     except Exception as e:
-        print(f"\n❌ 未知错误: {type(e).__name__}: {e}")
+        print(f"\n❌ 未知错误: {type(e).__name__}（详情已隐藏）")
         return False
 
 

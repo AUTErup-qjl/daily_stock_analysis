@@ -9,14 +9,16 @@ import base64
 import time
 from datetime import datetime
 
-webhook_url = "https://open.feishu.cn/open-apis/bot/v2/hook/fe8adb37-c0a0-469b-9909-eabc591aa8b9"
+webhook_url = os.getenv("FEISHU_WEBHOOK_URL", "").strip()
+if not webhook_url:
+    raise SystemExit("请先通过环境变量配置 FEISHU_WEBHOOK_URL；不要将地址写入代码。")
 
 print("\n" + "=" * 70)
 print("🚀 飞书 Webhook 快速验证测试")
 print("=" * 70)
 
 print("\n📌 配置信息:")
-print(f"   URL: {webhook_url}")
+print("   URL: [已配置，内容已隐藏]")
 print(f"   时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
 
 timestamp = str(int(time.time()))
@@ -46,7 +48,7 @@ try:
     
     print(f"\n📊 响应结果:")
     print(f"   HTTP 状态码: {response.status_code}")
-    print(f"   响应体: {response.text}")
+    print("   响应体已隐藏，避免泄露敏感信息。")
     
     if response.status_code == 200:
         resp_data = response.json()
@@ -62,9 +64,9 @@ try:
             print("   3. ✅ 运行 'python main.py' 进行分析")
         else:
             print(f"\n❌ 飞书返回错误 (code={code})")
-            print(f"   信息: {resp_data.get('msg', 'Unknown error')}")
+            print("   请根据返回代码检查飞书机器人配置。")
     else:
         print(f"\n❌ HTTP 请求失败 (状态码: {response.status_code})")
 
 except Exception as e:
-    print(f"\n❌ 请求异常: {type(e).__name__}: {e}")
+    print(f"\n❌ 请求异常: {type(e).__name__}（详情已隐藏）")
